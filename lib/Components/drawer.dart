@@ -20,12 +20,17 @@ class Mydrawer extends StatelessWidget {
           DrawerTile(
               title: "Notes",
               leading: Icon(Icons.home),
-              onTap: (){}
+              onTap: (){},
           ),
 
 
 
           //setting tile
+          DrawerTile(
+              title: "Settings",
+              leading: Icon(Icons.settings),
+              onTap: (){},
+          ),
 
         ],
       ),
