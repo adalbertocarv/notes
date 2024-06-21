@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:notes/Components/drawer.dart';
+import 'package:notes/Components/note_tile.dart';
 import 'package:notes/models/note_database.dart';
 import 'package:provider/provider.dart';
 import '../models/note.dart';
@@ -75,7 +76,7 @@ class _NotesPageState extends State<NotesPage> {
             textController.clear();//pop dialog box
             Navigator.pop(context);
           },
-            child: const Text("Update"),
+            child: const Text("Atualizar"),
           )
         ],
       ),
@@ -104,7 +105,10 @@ class _NotesPageState extends State<NotesPage> {
       backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButton: FloatingActionButton(
         onPressed: createNote,
-        child: const Icon(Icons.add),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        child: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.inversePrimary,),
       ),
       drawer: const Mydrawer(),
       body: Column(
@@ -130,25 +134,10 @@ class _NotesPageState extends State<NotesPage> {
                 final note = currentNotes[index];
             
                 // list tile UI
-                return ListTile(
-                  title: Text(note.text),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // editar botão
-                      IconButton(
-                        onPressed: () => updateNote(note),
-                        icon: Icon(Icons.edit),
-                      ),
-            
-                      // deletar botão
-                      IconButton(
-                        onPressed: () => deleteNote(note.id),
-                        icon: Icon(Icons.delete),
-                      ),
-            
-                    ],
-                  ),
+                return NoteTile(
+                  text: note.text,
+                  onEditPressed: () => updateNote(note),
+                  onDeletePressed: () => deleteNote(note.id),
                 );
               },
             ),
